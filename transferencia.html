@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soporte - MYDB.CC</title>
+    <title>Recargar Dólares - MYDB.CC</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
     <script src="https://unpkg.com/unlazy@0.11.3/dist/unlazy.with-hashing.iife.js" defer init></script>
     <style>
@@ -32,6 +32,23 @@
         .button-container button:hover {
             background-color: #5a3ac5; /* Cambio de color al pasar el cursor */
         }
+        .transactions-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        .transactions-table th, .transactions-table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        .transactions-table th {
+            background-color: #6f42c1;
+            color: #fff;
+        }
+        .transactions-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
     </style>
 </head>
 <body class="bg-zinc-100 dark:bg-zinc-900 text-black dark:text-white min-h-screen flex flex-col">
@@ -49,7 +66,7 @@
                     </svg>
                 </button>
                 <div id="menu" class="absolute right-0 mt-2 w-48 bg-white dark:bg-zinc-800 rounded-md shadow-lg z-10" style="display: none;">
-                    <a href="index.html" class="block px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-700">Inicio</a>
+                    <a href="inicio.html" class="block px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-700">Inicio</a>
                     <a href="soporte.html" class="block px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-700">Soporte</a>
                     <a href="transferencia.html" class="block px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-700">Fondos</a>
                 </div>
@@ -58,14 +75,31 @@
     </header>
     <main class="flex-1 flex flex-col items-center justify-center">
         <div class="container">
-            <h2 class="text-3xl font-bold mb-4">Soporte</h2>
-            <p class="text-lg mb-4">Soporte 24/7</p>
-            <p class="mb-4">Haga clic en "Enviar mensaje" si tienes alguna duda o problema relacionado con tu cuenta.</p>
+            <h2 class="text-3xl font-bold mb-4">Transacciones</h2>
+            <p class="text-lg mb-4">Agrega fondos de forma segura a tu cuenta para comprar lotes de cc</p>
             <div class="button-container">
-                <a href="mailto:elpepe21@gmail.com" class="text-white">
-                    <button class="bg-purple-600 hover:bg-purple-700 py-2 px-4 rounded-md">Enviar mensaje</button>
+                <a href="fondo.html" class="text-white">
+                    <button class="bg-purple-600 hover:bg-purple-700 py-2 px-4 rounded-md">Agregar fondos</button>
                 </a>
             </div>
+            <p class="mt-4">¿No sabes cómo hacerlo?</p>
+            <table class="transactions-table mt-4">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Dirección BTC</th>
+                        <th>Monto Recibido</th>
+                        <th>Estado</th>
+                        <th>Fecha</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="6">No tienes transacciones</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </main>
     <script>
@@ -80,12 +114,6 @@
             if (!menu.contains(e.target) && !menuButton.contains(e.target)) {
                 menu.style.display = 'none';
             }
-        });
-
-        // Ocultar el menú al cargar la página
-        window.addEventListener('DOMContentLoaded', function() {
-            var menu = document.getElementById('menu');
-            menu.style.display = 'none';
         });
     </script>
 </body>
