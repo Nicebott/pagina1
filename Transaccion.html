@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div class="min-h-screen bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100">
+  <header class="flex items-center justify-between p-4 border-b border-zinc-200 dark:border-zinc-700">
+    <div class="flex items-center space-x-2">
+      <img src="https://placehold.co/50x50" alt="Logo" class="w-10 h-10">
+      <span class="text-xl font-bold">MYDB.CC</span>
+    </div>
+    <div class="flex items-center space-x-4">
+      <div class="text-sm">
+        <span>Balance</span>
+        <span class="font-bold">$0</span>
+      </div>
+      <button class="p-2">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+  <main class="flex flex-col items-center p-4">
+    <h1 class="text-2xl font-bold mt-4">Transacciones</h1>
+    <p class="text-center mt-2">Agrega fondos de forma segura a tu cuenta para comprar lotes de cc</p>
+    <button class="mt-4 bg-purple-600 text-white py-2 px-4 rounded-lg flex items-center space-x-2">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+      </svg>
+      <span>Agregar fondos</span>
+    </button>
+    <p class="mt-2 text-sm">
+      ¿No sabes como hacerlo? <a href="#" class="text-purple-600">Mira este tutorial</a>
+    </p>
+    <div class="mt-4 bg-yellow-100 text-yellow-800 p-4 rounded-lg flex items-center space-x-2">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 20.5a8.5 8.5 0 110-17 8.5 8.5 0 010 17z"></path>
+      </svg>
+      <span>Al pulsar en agregar fondo se le generara una billetera BTC, transfiera ahi los fondo que deseas agregar.</span>
+    </div>
+    <div class="mt-4 bg-red-100 text-red-800 p-4 rounded-lg flex items-center space-x-2">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 20.5a8.5 8.5 0 110-17 8.5 8.5 0 010 17z"></path>
+      </svg>
+      <span>No tienes transacciones</span>
+    </div>
+    <table class="mt-4 w-full max-w-4xl border-collapse border border-zinc-200 dark:border-zinc-700">
+      <thead>
+        <tr class="bg-zinc-100 dark:bg-zinc-800">
+          <th class="border border-zinc-200 dark:border-zinc-700 p-2">ID</th>
+          <th class="border border-zinc-200 dark:border-zinc-700 p-2">Direccion BTC</th>
+          <th class="border border-zinc-200 dark:border-zinc-700 p-2">Monto Recibido</th>
+          <th class="border border-zinc-200 dark:border-zinc-700 p-2">Estado</th>
+          <th class="border border-zinc-200 dark:border-zinc-700 p-2">Fecha</th>
+          <th class="border border-zinc-200 dark:border-zinc-700 p-2">Accion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border border-zinc-200 dark:border-zinc-700 p-2" colspan="6" class="text-center">No tienes transacciones</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+</div>
+  </body>
+</html>
