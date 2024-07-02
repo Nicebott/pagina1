@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Ocultar el menú por defecto */
+        #menu {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-zinc-100 dark:bg-zinc-900 text-black dark:text-white">
+    <div class="min-h-screen p-4">
+        <header class="flex flex-col md:flex-row items-center justify-between mb-4 space-y-2 md:space-y-0">
+            <div class="flex items-center space-x-2">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-10 h-10">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <path d="M14 13V9.00001C14 7.89544 14.8954 7.00001 16 7.00001H42C43.1046 7.00001 44 7.89544 44 9.00001V27C44 28.1046 43.1046 29 42 29H40" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <rect x="4" y="19" width="30" height="22" rx="2" fill="#2eff51" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></rect>
+                            <path d="M4 28L34 28" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M34 23L34 35" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M4 23L4 35" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M11 34L19 34" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M25 34L27 34" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </g>
+                    </svg>                    
+                    <h1 class="text-2xl font-bold">Phanton CC</h1>
+                </a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div>Balance <span class="font-bold">$0</span></div>
+                <div class="relative">
+                    <button id="menuButton" class="p-2 bg-zinc-200 dark:bg-zinc-700 rounded-md">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                    <div id="menu" class="absolute right-0 mt-2 w-48 bg-white dark:bg-zinc-800 rounded-md shadow-lg z-10">
+                        <a href="index.html" class="block px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-700">Inicio</a>
+                        <a href="SOPORTE.HTML" class="block px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-700">Soporte</a>
+                        <a href="transferencia.html" class="block px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-700">Fondos</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-4">Resultados</h2>
+            <p class="text-lg mb-4">Selecciona un lote de cc</p>
+            
+            <p class="mb-2"><span class="text-red-500">40% Off en lotes de 5 CC</span></p>
+                <p class="mb-2"><span class="text-red-500">50% Off en lotes de 10 CC</span></p>
+            
+        </div>
+        
+
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white dark:bg-zinc-800 rounded-lg overflow-hidden">
+                <thead>
+                    <tr class="bg-zinc-200 dark:bg-zinc-700">
+                        <th class="p-2 text-left">Bin</th>
+                        <th class="p-2 text-left">Esquema</th>
+                        <th class="p-2 text-left">Tipo</th>
+                        <th class="p-2 text-left">Banco</th>
+                        <th class="p-2 text-left">País</th>
+                        <th class="p-2 text-left">Garantia</th>
+                        <th class="p-2 text-left">Cantidad de cc</th>
+                        <th class="p-2 text-left">Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b border-zinc-200 dark:border-zinc-700" data-url="detalles.html?bin=401106">
+                        <td class="p-2 flex items-center space-x-2">
+                            <input type="radio" name="bin" class="form-radio" data-url="detalles.html?bin=401106">
+                            <span>401106</span>
+                        </td>
+                        <td class="p-2"><img src="mastercard-svgrepo-com.svg" alt="Visa" class="w-10 h-5"></td>
+                        <td class="p-2">DEBIT</td>
+                        <td class="p-2">MCCOY F.C.U.</td>
+                        <td class="p-2 flex items-center space-x-2">
+                            <img src="usa.svg" alt="Flag" class="w-5 h-5">
+                            <span>United States</span>
+                        </td>
+                        <td class="p-2">✅</td>
+                        <td class="p-2">10</td>
+                        <td class="p-2">$125</td>
+                    </tr>
+                    <!-- Nuevos BINs -->
+                    <tr class="border-b border-zinc-200 dark:border-zinc-700" data-url="detalles.html?bin=521564">
+                        <td class="p-2 flex items-center space-x-2">
+                            <input type="radio" name="bin" class="form-radio" data-url="detalles.html?bin=521564">
+                            <span>521564</span>
+                        </td>
+                        <td class="p-2"><img src="visa-svgrepo-com.svg" alt="MasterCard" class="w-10 h-5"></td>
+                        <td class="p-2">CREDIT</td>
+                        <td class="p-2">HSBC</td>
+                        <td class="p-2 flex items-center space-x-2">
+                            <img src="united-kingdom-uk-svgrepo-com.svg" alt="Flag" class="w-5 h-5">
+                            <span>United Kingdom</span>
+                        </td>
+                        <td class="p-2">✅</td>
+                        <td class="p-2">15</td>
+                        <td class="p-2">$150</td>
+                    </tr>
+                    <tr class="border-b border-zinc-200 dark:border-zinc-700" data-url="detalles.html?bin=371449">
+                        <td class="p-2 flex items-center space-x-2">
+                            <input type="radio" name="bin" class="form-radio" data-url="detalles.html?bin=371449">
+                            <span>371449</span>
+                        </td>
+                        <td class="p-2"><img src="visa-svgrepo-com.svg" alt="American Express" class="w-10 h-5"></td>
+                        <td class="p-2">CREDIT</td>
+                        <td class="p-2">AMEX</td>
+                        <td class="p-2 flex items-center space-x-2">
+                            <img src="canada-svgrepo-com.svg" alt="Flag" class="w-5 h-5">
+                            <span>Canada</span>
+                        </td>
+                        <td class="p-2">✅</td>
+                        <td class="p-2">20</td>
+                        <td class="p-2">$200</td>
+                    </tr>
+                    <tr class="border-b border-zinc-200 dark:border-zinc-700" data-url="detalles.html?bin=601100">
+                        <td class="p-2 flex items-center space-x-2">
+                            <input type="radio" name="bin" class="form-radio" data-url="detalles.html?bin=601100">
+                            <span>601100</span>
+                        </td>
+                        <td class="p-2"><img src="visa-svgrepo-com.svg" alt="Discover" class="w-10 h-5"></td>
+                        <td class="p-2">CREDIT</td>
+                        <td class="p-2">DISCOVER</td>
+                        <td class="p-2 flex items-center space-x-2">
+                            <img src="usa.svg" alt="Flag" class="w-5 h-5">
+                            <span>United States</span>
+                        </td>
+                        <td class="p-2"><span>✅</span></td>
+                        <td class="p-2">25</td>
+                        <td class="p-2">$175</td>
+                    </tr>
+                    <tr class="border-b border-zinc-200 dark:border-zinc-700" data-url="detalles.html?bin=356600">
+                        <td class="p-2 flex items-center space-x-2">
+                            <input type="radio" name="bin" class="form-radio" data-url="detalles.html?bin=356600">
+                            <span>356600</span>
+                        </td>
+                        <td class="p-2"><img src="mastercard-svgrepo-com.svg" alt="JCB" class="w-10 h-5"></td>
+                        <td class="p-2">CREDIT</td>
+                        <td class="p-2">JCB</td>
+                        <td class="p-2 flex items-center space-x-2">
+                            <img src="japan-svgrepo-com.svg" alt="Flag" class="w-5 h-5">
+                            <span>Japan</span>
+                        </td>
+                        <td class="p-2">✅</td>
+                        <td class="p-2">30</td>
+                        <td class="p-2">$250</td>
+                    </tr>
+                    <tr class="border-b border-zinc-200 dark:border-zinc-700" data-url="detalles.html?bin=213123">
+                        <td class="p-2 flex items-center space-x-2">
+                            <input type="radio" name="bin" class="form-radio" data-url="detalles.html?bin=213123">
+                            <span>213123</span>
+                        </td>
+                        <td class="p-2"><img src="mastercard-svgrepo-com.svg" alt="Maestro" class="w-10 h-5"></td>
+                        <td class="p-2">DEBIT</td>
+                        <td class="p-2">SANTANDER</td>
+                        <td class="p-2 flex items-center space-x-2">
+                            <img src="flag-for-flag-spain-svgrepo-com.svg" alt="Flag" class="w-5 h-5">
+                            <span>Spain</span>
+                        </td>
+                        <td class="p-2">✅</td>
+                        <td class="p-2">10</td>
+                        <td class="p-2">$175</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="flex flex-col md:flex-row justify-between mt-4 space-y-2 md:space-y-0 md:space-x-2">
+            <button class="p-2 bg-zinc-200 dark:bg-zinc-700 rounded-md">← Regresar</button>
+            <button id="verDetalles" style="background-color: #2eff51;" class="p-2 text-white rounded-md">Ver detalles →</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('menuButton').addEventListener('click', function() {
+            var menu = document.getElementById('menu');
+            menu.style.display = menu.style.display === 'none' || menu.style.display === '' ? 'block' : 'none';
+        });
+
+        window.addEventListener('click', function(e) {
+            var menu = document.getElementById('menu');
+            var menuButton = document.getElementById('menuButton');
+            if (!menu.contains(e.target) && !menuButton.contains(e.target)) {
+                menu.style.display = 'none';
+            }
+        });
+
+        document.getElementById('verDetalles').addEventListener('click', function() {
+            var selectedBin = document.querySelector('input[name="bin"]:checked');
+            if (selectedBin) {
+                var url = selectedBin.dataset.url;
+                window.location.href = url;
+            } else {
+                alert("Por favor, seleccione un BIN para ver los detalles.");
+            }
+        });
+    </script>
+</body>
+</html>
