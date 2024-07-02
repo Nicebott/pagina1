@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phanton CC</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <script src="https://unpkg.com/unlazy@0.11.3/dist/unlazy.with-hashing.iife.js" defer init></script>
+    <style>
+        body {
+            background-color: #f0f4f8; /* Color de fondo ajustado */
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+        .button-container button {
+            background-color: #6f42c1; /* Color de fondo del botón ajustado */
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .button-container button:hover {
+            background-color: #5a3ac5; /* Cambio de color al pasar el cursor */
+        }
+    </style>
+</head>
+<body class="bg-zinc-100 dark:bg-zinc-900 text-black dark:text-white min-h-screen flex flex-col">
+    <header class="flex flex-col md:flex-row items-center justify-between p-4 bg-zinc-100 dark:bg-zinc-900 mb-4">
+        <div class="flex items-center space-x-2">
+            <a href="index.html" class="flex items-center space-x-2">
+                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-10 h-10">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path d="M14 13V9.00001C14 7.89544 14.8954 7.00001 16 7.00001H42C43.1046 7.00001 44 7.89544 44 9.00001V27C44 28.1046 43.1046 29 42 29H40" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <rect x="4" y="19" width="30" height="22" rx="2" fill="#2eff51" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></rect>
+                        <path d="M4 28L34 28" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M34 23L34 35" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M4 23L4 35" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M11 34L19 34" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M25 34L27 34" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </g>
+                </svg>                
+                <h1 class="text-2xl font-bold">Phanton CC</h1>
+            </a>
+        </div>
+        <div class="flex items-center space-x-4">
+            <div>Balance <span class="font-bold">$0</span></div>
+            <div class="relative">
+                <button id="menuButton" class="p-2 bg-zinc-200 dark:bg-zinc-700 rounded-md">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+                <div id="menu" class="absolute right-0 mt-2 w-48 bg-white dark:bg-zinc-800 rounded-md shadow-lg z-10" style="display: none;">
+                    <a href="index.html" class="block px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-700">Inicio</a>
+                    <a href="soporte.html" class="block px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-700">Soporte</a>
+                    <a href="transferencia.html" class="block px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-700">Fondos</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="flex-1 flex flex-col items-center justify-center">
+        <div class="container">
+            <h2 class="text-3xl font-bold mb-4">Soporte</h2>
+            <p class="text-lg mb-4">Soporte 24/7</p>
+            <p class="mb-4">Haga clic en "Enviar mensaje" si tienes alguna duda o problema relacionado con tu cuenta.</p>
+            <div class="button-container">
+                <a href="mailto:elpepe21@gmail.com" class="text-white">
+                    <button style="background-color: #2eff51;" class="hover:bg-green-600 py-2 px-4 rounded-md">Enviar mensaje</button>
+                </a>
+            </div>
+            
+        </div>
+    </main>
+    <script>
+        document.getElementById('menuButton').addEventListener('click', function() {
+            var menu = document.getElementById('menu');
+            menu.style.display = menu.style.display === 'none' || menu.style.display === '' ? 'block' : 'none';
+        });
+
+        window.addEventListener('click', function(e) {
+            var menu = document.getElementById('menu');
+            var menuButton = document.getElementById('menuButton');
+            if (!menu.contains(e.target) && !menuButton.contains(e.target)) {
+                menu.style.display = 'none';
+            }
+        });
+
+        // Ocultar el menú al cargar la página
+        window.addEventListener('DOMContentLoaded', function() {
+            var menu = document.getElementById('menu');
+            menu.style.display = 'none';
+        });
+    </script>
+</body>
+</html>

