@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recargar Dólares - MYDB.CC</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <script src="https://unpkg.com/unlazy@0.11.3/dist/unlazy.with-hashing.iife.js" defer init></script>
+    <style>
+        /* Estilos adicionales según necesidad */
+        body {
+            background-color: #f0f4f8; /* Color de fondo ajustado */
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+        .button-container button {
+            background-color: #6f42c1; /* Color de fondo del botón ajustado */
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .button-container button:hover {
+            background-color: #5a3ac5; /* Cambio de color al pasar el cursor */
+        }
+        .transactions-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        .transactions-table th, .transactions-table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        .transactions-table th {
+            background-color: #6f42c1;
+            color: #fff;
+        }
+        .transactions-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body class="bg-zinc-100 dark:bg-zinc-900 text-black dark:text-white min-h-screen flex flex-col">
+    <header class="flex flex-col md:flex-row items-center justify-between p-4 bg-zinc-100 dark:bg-zinc-900 mb-4">
+        <div class="flex items-center space-x-2">
+            <img src="https://placehold.co/40x40" alt="Logo" class="w-10 h-10">
+            <h1 class="text-2xl font-bold">YORDI.CC</h1>
+        </div>
+        <div class="flex items-center space-x-4">
+            <div>Balance <span class="font-bold">$0</span></div>
+            <div class="relative">
+                <button id="menuButton" class="p-2 bg-zinc-200 dark:bg-zinc-700 rounded-md">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+                <div id="menu" class="absolute right-0 mt-2 w-48 bg-white dark:bg-zinc-800 rounded-md shadow-lg z-10" style="display: none;">
+                    <a href="inicio.html" class="block px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-700">Inicio</a>
+                    <a href="soporte.html" class="block px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-700">Soporte</a>
+                    <a href="transferencia.html" class="block px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-700">Fondos</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="flex-1 flex flex-col items-center justify-center">
+        <div class="container">
+            <h2 class="text-3xl font-bold mb-4">Transacciones</h2>
+            <p class="text-lg mb-4">Agrega fondos de forma segura a tu cuenta para comprar lotes de cc</p>
+            <div class="button-container">
+                <a href="fondo.html" class="text-white">
+                    <button class="bg-purple-600 hover:bg-purple-700 py-2 px-4 rounded-md">Agregar fondos</button>
+                </a>
+            </div>
+            <p class="mt-4">¿No sabes cómo hacerlo?</p>
+            <table class="transactions-table mt-4">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Dirección BTC</th>
+                        <th>Monto Recibido</th>
+                        <th>Estado</th>
+                        <th>Fecha</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="6">No tienes transacciones</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <script>
+        document.getElementById('menuButton').addEventListener('click', function() {
+            var menu = document.getElementById('menu');
+            menu.style.display = menu.style.display === 'none' || menu.style.display === '' ? 'block' : 'none';
+        });
+
+        window.addEventListener('click', function(e) {
+            var menu = document.getElementById('menu');
+            var menuButton = document.getElementById('menuButton');
+            if (!menu.contains(e.target) && !menuButton.contains(e.target)) {
+                menu.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
