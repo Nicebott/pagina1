@@ -11,6 +11,9 @@
             padding: 0;
             background-color: #f0f0f0;
             color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         .navbar {
             background-color: #3498db;
@@ -46,6 +49,7 @@
             display: block;
         }
         .container {
+            flex: 1;
             max-width: 1200px;
             margin: 20px auto;
             background-color: white;
@@ -118,9 +122,8 @@
             color: white;
             text-align: center;
             padding: 10px 0;
-            position: fixed;
+            position: relative;
             width: 100%;
-            bottom: 0;
         }
         @media (max-width: 768px) {
             .navbar a { display: none; }
@@ -142,6 +145,8 @@
                 display: flex;
                 flex-direction: column;
                 width: 100%;
+                padding: 0;
+                margin: 0;
             }
             .navbar-collapse li {
                 float: none;
@@ -293,12 +298,21 @@
             const filteredCourses = courses.filter(course => 
                 course.asignatura.toLowerCase().includes(searchTerm) ||
                 course.profesor.toLowerCase().includes(searchTerm) ||
-                course.nrc.includes(searchTerm)
+                course.nrc.toLowerCase().includes(searchTerm)
             );
+            displayFilteredCourses(filteredCourses);
+            setupPagination();
+        }
+
+        function displayFilteredCourses(filteredCourses) {
             const tableBody = document.querySelector('#courseTable tbody');
             tableBody.innerHTML = '';
 
-            filteredCourses.forEach(course => {
+            const start = (currentPage - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+            const paginatedCourses = filteredCourses.slice(start, end);
+
+            paginatedCourses.forEach(course => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${course.nrc}</td>
@@ -316,22 +330,8 @@
         function filterByProvince() {
             const selectedProvince = document.getElementById('provinceSelect').value;
             const filteredCourses = selectedProvince ? courses.filter(course => course.provincia === selectedProvince) : courses;
-            const tableBody = document.querySelector('#courseTable tbody');
-            tableBody.innerHTML = '';
-
-            filteredCourses.forEach(course => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${course.nrc}</td>
-                    <td>${course.asignatura}</td>
-                    <td>${course.profesor}</td>
-                    <td>${course.horario}</td>
-                    <td>${course.modalidad}</td>
-                    <td>${course.calificacion}</td>
-                    <td>${course.provincia}</td>
-                `;
-                tableBody.appendChild(row);
-            });
+            displayFilteredCourses(filteredCourses);
+            setupPagination();
         }
 
         function toggleMenu() {
