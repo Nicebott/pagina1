@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programación Docente UASD 2024-20</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .search-container {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        input[type="text"], select {
+            flex-grow: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            padding: 12px 24px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .pagination {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .pagination button {
+            margin: 0 5px;
+        }
+        #provinceSelect {
+            margin-top: 10px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Programación Docente UASD 2024-20</h1>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Buscar Materia, Profesor o Código">
+            <button onclick="search()">Buscar</button>
+        </div>
+        <select id="provinceSelect" onchange="filterByProvince()">
+            <option value="">Todas las Provincias</option>
+            <option value="Santo Domingo">Santo Domingo</option>
+            <option value="Santiago">Santiago</option>
+            <!-- Agregar más provincias según sea necesario -->
+        </select>
+        <table id="courseTable">
+            <thead>
+                <tr>
+                    <th>NRC</th>
+                    <th>Asignatura</th>
+                    <th>Profesor</th>
+                    <th>Horario</th>
+                    <th>Modalidad</th>
+                    <th>Calificación</th>
+                    <th>Provincia</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Los datos se llenarán dinámicamente aquí -->
+            </tbody>
+        </table>
+        <div class="pagination" id="pagination">
+            <!-- Los controles de paginación se llenarán dinámicamente aquí -->
+        </div>
+    </div>
+
+    <script>
+        let courses = [];
+        let currentPage = 1;
+        const rowsPerPage = 10;
+
+        async function fetchCourses() {
+            try {
+                const response = await fetch('data.json');
+                if (!response.ok) throw new Error('Network response was not ok');
+                courses = await response.json();
+                displayCourses();
+                setupPagination();
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                alert('No se pudieron cargar los datos. Por favor, inténtelo de nuevo más tarde.');
+            }
+        }
+
+        function displayCourses() {
+            const tableBody = document.querySelector('#courseTable tbody');
+            tableBody.innerHTML = '';
+
+            const start = (currentPage - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+            const paginatedCourses = courses.slice(start, end);
+
+            paginatedCourses.forEach(course => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${course.nrc}</td>
+                    <td>${course.asignatura}</td>
+                    <td>${course.profesor}</td>
+                    <td>${course.horario}</td>
+                    <td>${course.modalidad}</td>
+                    <td>${course.calificacion}</td>
+                    <td>${course.provincia}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function setupPagination() {
+            const paginationContainer = document.getElementById('pagination');
+            paginationContainer.innerHTML = '';
+
+            const totalPages = Math.ceil(courses.length / rowsPerPage);
+
+            for (let i = 1; i <= totalPages; i++) {
+                const button = document.createElement('button');
+                button.innerText = i;
+                button.onclick = () => {
+                    currentPage = i;
+                    displayCourses();
+                };
+                if (i === currentPage) button.disabled = true;
+                paginationContainer.appendChild(button);
+            }
+        }
+
+        function search() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const filteredCourses = courses.filter(course => 
+                course.asignatura.toLowerCase().includes(searchTerm) ||
+                course.profesor.toLowerCase().includes(searchTerm) ||
+                course.nrc.includes(searchTerm)
+            );
+            const tableBody = document.querySelector('#courseTable tbody');
+            tableBody.innerHTML = '';
+
+            filteredCourses.forEach(course => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${course.nrc}</td>
+                    <td>${course.asignatura}</td>
+                    <td>${course.profesor}</td>
+                    <td>${course.horario}</td>
+                    <td>${course.modalidad}</td>
+                    <td>${course.calificacion}</td>
+                    <td>${course.provincia}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function filterByProvince() {
+            const selectedProvince = document.getElementById('provinceSelect').value;
+            const filteredCourses = selectedProvince ? courses.filter(course => course.provincia === selectedProvince) : courses;
+            const tableBody = document.querySelector('#courseTable tbody');
+            tableBody.innerHTML = '';
+
+            filteredCourses.forEach(course => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${course.nrc}</td>
+                    <td>${course.asignatura}</td>
+                    <td>${course.profesor}</td>
+                    <td>${course.horario}</td>
+                    <td>${course.modalidad}</td>
+                    <td>${course.calificacion}</td>
+                    <td>${course.provincia}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        window.onload = fetchCourses;
+    </script>
+</body>
+</html>
