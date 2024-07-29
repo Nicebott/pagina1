@@ -161,6 +161,8 @@
             <option value="">Todas las Provincias</option>
             <option value="Santo Domingo">Santo Domingo</option>
             <option value="Santiago">Santiago</option>
+            <option value="Nagua">Nagua</option>
+            <option value="Dajabón">Dajabón</option>
             <!-- Add more provinces as needed -->
         </select>
         <div class="table-container">
@@ -192,9 +194,9 @@
 
     <script>
         let courses = [];
+        let filteredCourses = [];
         let currentPage = 1;
         const rowsPerPage = 10;
-        let filteredCourses = [];
 
         async function fetchCourses() {
             try {
@@ -282,7 +284,7 @@
 
         function search() {
             const searchTerm = normalizeString(document.getElementById('searchInput').value);
-            filteredCourses = courses.filter(course => 
+            filteredCourses = courses.filter(course =>
                 normalizeString(course.asignatura).includes(searchTerm) ||
                 normalizeString(course.profesor).includes(searchTerm) ||
                 course.nrc.includes(searchTerm)
