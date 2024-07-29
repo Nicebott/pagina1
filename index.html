@@ -12,6 +12,39 @@
             background-color: #f0f0f0;
             color: #333;
         }
+        .navbar {
+            background-color: #3498db;
+            overflow: hidden;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #2980b9;
+        }
+        .navbar .menu-toggle {
+            display: none;
+        }
+        .navbar-collapse {
+            display: flex;
+        }
+        .navbar-collapse ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar-collapse li {
+            float: left;
+        }
+        .navbar-collapse li a {
+            padding: 14px 16px;
+            display: block;
+        }
         .container {
             max-width: 1200px;
             margin: 20px auto;
@@ -80,75 +113,58 @@
             margin-top: 10px;
             width: 100%;
         }
-        /* Menu de navegación */
-        nav {
-            background-color: #3498db;
-            color: white;
-            padding: 10px;
-        }
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .nav-links {
-            display: flex;
-            gap: 15px;
-        }
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-        }
-        .nav-links a:hover {
-            text-decoration: underline;
-        }
-        .menu-toggle {
-            display: none;
-            font-size: 24px;
-            cursor: pointer;
-        }
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                background-color: #3498db;
-                position: absolute;
-                top: 50px;
-                left: 0;
-                padding: 10px;
-                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            }
-            .nav-links.show {
-                display: flex;
-            }
-            .menu-toggle {
-                display: block;
-            }
-        }
-        footer {
+        .footer {
             background-color: #3498db;
             color: white;
             text-align: center;
-            padding: 15px;
+            padding: 10px 0;
             position: fixed;
-            bottom: 0;
             width: 100%;
+            bottom: 0;
+        }
+        @media (max-width: 768px) {
+            .navbar a { display: none; }
+            .navbar .menu-toggle {
+                display: block;
+                background-color: #3498db;
+                color: white;
+                padding: 14px 16px;
+                cursor: pointer;
+            }
+            .navbar-collapse {
+                display: none;
+                flex-direction: column;
+            }
+            .navbar-collapse.show {
+                display: flex;
+            }
+            .navbar-collapse ul {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+            }
+            .navbar-collapse li {
+                float: none;
+            }
+            .navbar-collapse li a {
+                padding: 14px 16px;
+                text-align: center;
+                display: block;
+            }
         }
     </style>
 </head>
 <body>
-    <nav>
-        <div class="nav-container">
-            <span class="menu-toggle" onclick="toggleMenu()">☰</span>
-            <div class="nav-links" id="navLinks">
-                <a href="#inicio">Inicio</a>
-                <a href="#virtual">Virtual</a>
-            </div>
+    <div class="navbar">
+        <div class="menu-toggle" onclick="toggleMenu()">☰ Menú</div>
+        <div class="navbar-collapse">
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#virtual">Virtual</a></li>
+            </ul>
         </div>
-    </nav>
-    
+    </div>
+
     <div class="container">
         <h1>Programación Docente UASD 2024-20</h1>
         <div class="search-container">
@@ -184,9 +200,9 @@
         </div>
     </div>
 
-    <footer>
-        &copy; 2024 nicebott. Todos los derechos reservados.
-    </footer>
+    <div class="footer">
+        <p>&copy; 2024 nicebott. Todos los derechos reservados.</p>
+    </div>
 
     <script>
         let courses = [];
@@ -319,8 +335,8 @@
         }
 
         function toggleMenu() {
-            const navLinks = document.getElementById('navLinks');
-            navLinks.classList.toggle('show');
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+            navbarCollapse.classList.toggle('show');
         }
 
         window.onload = fetchCourses;
