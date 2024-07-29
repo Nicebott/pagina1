@@ -165,15 +165,40 @@
 
             const totalPages = Math.ceil(courses.length / rowsPerPage);
 
-            for (let i = 1; i <= totalPages; i++) {
-                const button = document.createElement('button');
-                button.innerText = i;
-                button.onclick = () => {
-                    currentPage = i;
-                    displayCourses();
+            if (totalPages > 1) {
+                const prevButton = document.createElement('button');
+                prevButton.innerText = '«';
+                prevButton.onclick = () => {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        displayCourses();
+                        setupPagination();
+                    }
                 };
-                if (i === currentPage) button.disabled = true;
-                paginationContainer.appendChild(button);
+                paginationContainer.appendChild(prevButton);
+
+                for (let i = 1; i <= totalPages; i++) {
+                    const button = document.createElement('button');
+                    button.innerText = i;
+                    button.onclick = () => {
+                        currentPage = i;
+                        displayCourses();
+                        setupPagination();
+                    };
+                    if (i === currentPage) button.disabled = true;
+                    paginationContainer.appendChild(button);
+                }
+
+                const nextButton = document.createElement('button');
+                nextButton.innerText = '»';
+                nextButton.onclick = () => {
+                    if (currentPage < totalPages) {
+                        currentPage++;
+                        displayCourses();
+                        setupPagination();
+                    }
+                };
+                paginationContainer.appendChild(nextButton);
             }
         }
 
