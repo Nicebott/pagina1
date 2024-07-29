@@ -175,7 +175,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2024 Universidad Autónoma de Santo Domingo. Todos los derechos reservados.</p>
+        <p>&copy; 2024 TheNicebott. Todos los derechos reservados.</p>
     </footer>
 
     <script>
@@ -262,11 +262,15 @@
             }
         }
 
+        function normalizeString(str) {
+            return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        }
+
         function search() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const searchTerm = normalizeString(document.getElementById('searchInput').value);
             const filteredCourses = courses.filter(course => 
-                course.asignatura.toLowerCase().includes(searchTerm) ||
-                course.profesor.toLowerCase().includes(searchTerm) ||
+                normalizeString(course.asignatura).includes(searchTerm) ||
+                normalizeString(course.profesor).includes(searchTerm) ||
                 course.nrc.includes(searchTerm)
             );
             const tableBody = document.querySelector('#courseTable tbody');
