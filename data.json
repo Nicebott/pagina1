@@ -48,5 +48,9 @@
     {"nrc": "10047", "asignatura": "Tendencias en Comunicación", "profesor": "Cristina Martínez", "horario": "02PM a 04PM", "modalidad": "Online", "calificacion": "7/10", "provincia": "Santo Domingo"},
     {"nrc": "10048", "asignatura": "Administración Estratégica", "profesor": "Andrés Rodríguez", "horario": "04PM a 06PM", "modalidad": "Presencial", "calificacion": "8/10", "provincia": "Santiago"},
     {"nrc": "10049", "asignatura": "Desarrollo Personal", "profesor": "Laura García", "horario": "08AM a 10AM", "modalidad": "Online", "calificacion": "9/10", "provincia": "Santo Domingo"},
-    {"nrc": "10050", "asignatura": "Liderazgo", "profesor": "Pedro Fernández", "horario": "10AM a 12PM", "modalidad": "Presencial", "calificacion": "7/10", "provincia": "Santiago"}
+    {"nrc": "10050", "asignatura": "Liderazgo", "profesor": "Pedro Fernández", "horario": "10AM a 12PM", "modalidad": "Presencial", "calificacion": "7/10", "provincia": "Nagua"},
+    {"nrc": "10048", "asignatura": "Administración Estratégica", "profesor": "Andrés Rodríguez", "horario": "04PM a 06PM", "modalidad": "Presencial", "calificacion": "8/10", "provincia": "Dajabón"},
+    {"nrc": "10048", "asignatura": "Administración Estratégica", "profesor": "Andrés Rodríguez", "horario": "04PM a 06PM", "modalidad": "Presencial", "calificacion": "8/10", "provincia": "Nagua"}
+    
+    
 ]
