@@ -11,57 +11,48 @@
             padding: 0;
             background-color: #f0f0f0;
             color: #333;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
         }
-        .navbar {
+        .header {
             background-color: #3498db;
-            overflow: hidden;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-        .navbar a {
-            float: left;
-            display: block;
             color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .navbar a:hover {
-            background-color: #2980b9;
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .menu {
+            display: none;
         }
         .menu-toggle {
             display: none;
+            font-size: 24px;
+            cursor: pointer;
         }
-        .navbar-collapse {
+        .menu-links {
             display: flex;
-            justify-content: center;
+            gap: 10px;
         }
-        .navbar-collapse ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
+        .menu-links a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
         }
-        .navbar-collapse li {
-            margin: 0;
-        }
-        .navbar-collapse li a {
-            padding: 14px 16px;
-            display: block;
+        .menu-links a:hover {
+            background-color: #2980b9;
         }
         .container {
-            margin: 80px auto 20px; /* Adjusted margin for the fixed navbar */
             max-width: 1200px;
+            margin: 20px auto;
             background-color: white;
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            overflow-x: auto; /* Ensure horizontal scrolling for table on small screens */
         }
         h1 {
             color: #2c3e50;
@@ -70,15 +61,14 @@
         }
         .search-container {
             display: flex;
-            flex-direction: column;
             margin-bottom: 20px;
         }
         input[type="text"], select {
+            flex-grow: 1;
             padding: 12px;
             border: 1px solid #ddd;
             border-radius: 4px;
             font-size: 16px;
-            margin-bottom: 10px;
         }
         button {
             padding: 12px 24px;
@@ -104,6 +94,7 @@
             border: 1px solid #ddd;
             padding: 12px;
             text-align: left;
+            min-width: 120px; /* Ensure minimum width for each column */
         }
         th {
             background-color: #3498db;
@@ -120,65 +111,47 @@
             margin: 0 5px;
         }
         #provinceSelect {
+            margin-top: 10px;
             width: 100%;
-        }
-        .footer {
-            background-color: #3498db;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-            position: relative;
-            width: 100%;
-            margin-top: auto; /* Ensures footer is at the bottom */
         }
         @media (max-width: 768px) {
-            .navbar a { display: none; }
+            .menu {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                right: 0;
+                background-color: #3498db;
+                width: 200px;
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                border-radius: 8px;
+                display: none;
+            }
+            .menu-links {
+                display: block;
+                padding: 10px;
+            }
             .menu-toggle {
                 display: block;
-                background-color: #3498db;
-                color: white;
-                padding: 14px 16px;
-                cursor: pointer;
-                text-align: center;
             }
-            .navbar-collapse {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-            }
-            .navbar-collapse.show {
+            .menu.show {
                 display: flex;
-            }
-            .navbar-collapse ul {
-                flex-direction: column;
-                width: 100%;
-                padding: 0;
-                margin: 0;
-            }
-            .navbar-collapse li {
-                margin: 0;
-            }
-            .navbar-collapse li a {
-                padding: 14px 16px;
-                text-align: center;
-                display: block;
             }
         }
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <div class="menu-toggle" onclick="toggleMenu()">☰ Menú</div>
-        <div class="navbar-collapse">
-            <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#virtual">Virtual</a></li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="container">
+    <header class="header">
+        <span class="menu-toggle" onclick="toggleMenu()">☰</span>
         <h1>Programación Docente UASD 2024-20</h1>
+        <nav class="menu" id="menu">
+            <div class="menu-links">
+                <a href="#">Inicio</a>
+                <a href="#">Virtual</a>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="Buscar Materia, Profesor o Código">
             <button onclick="search()">Buscar</button>
@@ -210,10 +183,6 @@
         <div class="pagination" id="pagination">
             <!-- Los controles de paginación se llenarán dinámicamente aquí -->
         </div>
-    </div>
-
-    <div class="footer">
-        <p>&copy; 2024 nicebott. Todos los derechos reservados.</p>
     </div>
 
     <script>
@@ -302,24 +271,15 @@
 
         function search() {
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            const filteredCourses = courses.filter(course =>
-                course.nrc.toLowerCase().includes(searchTerm) ||
+            const filteredCourses = courses.filter(course => 
                 course.asignatura.toLowerCase().includes(searchTerm) ||
-                course.profesor.toLowerCase().includes(searchTerm)
+                course.profesor.toLowerCase().includes(searchTerm) ||
+                course.nrc.includes(searchTerm)
             );
-            displayFilteredCourses(filteredCourses);
-            setupPagination();
-        }
-
-        function displayFilteredCourses(filteredCourses) {
             const tableBody = document.querySelector('#courseTable tbody');
             tableBody.innerHTML = '';
 
-            const start = (currentPage - 1) * rowsPerPage;
-            const end = start + rowsPerPage;
-            const paginatedCourses = filteredCourses.slice(start, end);
-
-            paginatedCourses.forEach(course => {
+            filteredCourses.forEach(course => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${course.nrc}</td>
@@ -337,13 +297,27 @@
         function filterByProvince() {
             const selectedProvince = document.getElementById('provinceSelect').value;
             const filteredCourses = selectedProvince ? courses.filter(course => course.provincia === selectedProvince) : courses;
-            displayFilteredCourses(filteredCourses);
-            setupPagination();
+            const tableBody = document.querySelector('#courseTable tbody');
+            tableBody.innerHTML = '';
+
+            filteredCourses.forEach(course => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${course.nrc}</td>
+                    <td>${course.asignatura}</td>
+                    <td>${course.profesor}</td>
+                    <td>${course.horario}</td>
+                    <td>${course.modalidad}</td>
+                    <td>${course.calificacion}</td>
+                    <td>${course.provincia}</td>
+                `;
+                tableBody.appendChild(row);
+            });
         }
 
         function toggleMenu() {
-            const navbarCollapse = document.querySelector('.navbar-collapse');
-            navbarCollapse.classList.toggle('show');
+            const menu = document.getElementById('menu');
+            menu.classList.toggle('show');
         }
 
         window.onload = fetchCourses;
