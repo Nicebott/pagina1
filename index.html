@@ -80,9 +80,75 @@
             margin-top: 10px;
             width: 100%;
         }
+        /* Menu de navegación */
+        nav {
+            background-color: #3498db;
+            color: white;
+            padding: 10px;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: #3498db;
+                position: absolute;
+                top: 50px;
+                left: 0;
+                padding: 10px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+            .nav-links.show {
+                display: flex;
+            }
+            .menu-toggle {
+                display: block;
+            }
+        }
+        footer {
+            background-color: #3498db;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
+    <nav>
+        <div class="nav-container">
+            <span class="menu-toggle" onclick="toggleMenu()">☰</span>
+            <div class="nav-links" id="navLinks">
+                <a href="#inicio">Inicio</a>
+                <a href="#virtual">Virtual</a>
+            </div>
+        </div>
+    </nav>
+    
     <div class="container">
         <h1>Programación Docente UASD 2024-20</h1>
         <div class="search-container">
@@ -117,6 +183,10 @@
             <!-- Los controles de paginación se llenarán dinámicamente aquí -->
         </div>
     </div>
+
+    <footer>
+        &copy; 2024 nicebott. Todos los derechos reservados.
+    </footer>
 
     <script>
         let courses = [];
@@ -246,6 +316,11 @@
                 `;
                 tableBody.appendChild(row);
             });
+        }
+
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('show');
         }
 
         window.onload = fetchCourses;
