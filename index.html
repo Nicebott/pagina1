@@ -16,11 +16,8 @@
             transition: background-color 0.3s, color 0.3s;
         }
         body.dark-mode {
-            background-color: #181818;
+            background-color: #1e1e1e;
             color: #e0e0e0;
-        }
-        .content-wrapper {
-            flex: 1 0 auto;
         }
         .container {
             max-width: 1200px;
@@ -29,10 +26,11 @@
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            transition: background-color 0.3s, color 0.3s;
+            transition: background-color 0.3s, box-shadow 0.3s;
         }
         body.dark-mode .container {
-            background-color: #2c2c2c;
+            background-color: #2e2e2e;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
         }
         h1 {
             color: #2c3e50;
@@ -55,9 +53,9 @@
             box-sizing: border-box;
         }
         body.dark-mode input[type="text"], body.dark-mode select {
-            border-color: #444;
+            border-color: #555;
             background-color: #333;
-            color: #ddd;
+            color: #e0e0e0;
         }
         button {
             padding: 12px 24px;
@@ -70,13 +68,13 @@
             font-size: 16px;
         }
         body.dark-mode button {
-            background-color: #555;
+            background-color: #34495e;
         }
         button:hover {
             background-color: #34495e;
         }
         body.dark-mode button:hover {
-            background-color: #666;
+            background-color: #2c3e50;
         }
         .table-container {
             overflow-x: auto;
@@ -91,15 +89,12 @@
             text-align: left;
             min-width: 120px;
         }
-        body.dark-mode th, body.dark-mode td {
-            border-color: #444;
-        }
         th {
             background-color: #2c3e50;
             color: white;
         }
         body.dark-mode th {
-            background-color: #444;
+            background-color: #34495e;
         }
         tr:nth-child(even) {
             background-color: #f2f2f2;
@@ -122,13 +117,13 @@
             font-size: 16px;
         }
         body.dark-mode .pagination button {
-            background-color: #555;
+            background-color: #34495e;
         }
         .pagination button:hover {
             background-color: #34495e;
         }
         body.dark-mode .pagination button:hover {
-            background-color: #666;
+            background-color: #2c3e50;
         }
         .pagination span {
             margin: 0 5px;
@@ -147,7 +142,7 @@
             padding: 10px 0;
         }
         body.dark-mode .menu {
-            background-color: #333;
+            background-color: #1e1e1e;
         }
         .menu-content {
             max-width: 1200px;
@@ -163,7 +158,7 @@
             padding: 10px 15px;
         }
         body.dark-mode .menu a {
-            color: #ddd;
+            color: #ecf0f1;
         }
         .menu-toggle {
             display: none;
@@ -173,7 +168,7 @@
             padding: 10px;
         }
         body.dark-mode .menu-toggle {
-            color: #ccc;
+            color: #ecf0f1;
         }
         footer {
             background-color: #2c3e50;
@@ -183,7 +178,7 @@
             flex-shrink: 0;
         }
         body.dark-mode footer {
-            background-color: #333;
+            background-color: #1e1e1e;
         }
         @media (max-width: 768px) {
             .menu-content {
@@ -201,7 +196,7 @@
                 z-index: 1000;
             }
             body.dark-mode .menu-items {
-                background-color: #333;
+                background-color: #1e1e1e;
             }
             .menu-items.active {
                 right: 0;
@@ -212,7 +207,7 @@
                 border-bottom: 1px solid #34495e;
             }
             body.dark-mode .menu-items a {
-                border-bottom: 1px solid #555;
+                border-bottom: 1px solid #444;
             }
             .menu-toggle {
                 display: block;
@@ -233,43 +228,6 @@
                 display: block;
             }
         }
-        #scrollToTop {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            display: none;
-            width: 50px;
-            height: 50px;
-            background-color: #2c3e50;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            transition: opacity 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
-        body.dark-mode #scrollToTop {
-            background-color: #444;
-        }
-        #scrollToTop:hover {
-            background-color: #34495e;
-        }
-        body.dark-mode #scrollToTop:hover {
-            background-color: #666;
-        }
-        #scrollToTop::after {
-            content: '';
-            display: block;
-            width: 0;
-            height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-bottom: 10px solid white;
-        }
     </style>
 </head>
 <body>
@@ -282,8 +240,8 @@
                     <a href="#">Virtual</a>
                     <a href="#">Contacto</a>
                     <a href="#">Acerca de</a>
-                    <button onclick="toggleDarkMode()">Modo Oscuro</button>
                 </div>
+                <button onclick="toggleDarkMode()">🌙</button>
             </div>
         </nav>
         <div class="overlay" onclick="toggleMenu()"></div>
@@ -329,8 +287,6 @@
         <p>&copy; 2024 Universidad Autónoma de Santo Domingo. Todos los derechos reservados.</p>
     </footer>
 
-    <button id="scrollToTop" onclick="scrollToTop()"></button>
-
     <script>
         let courses = [];
         let filteredCourses = [];
@@ -355,9 +311,9 @@
             const tableBody = document.querySelector('#courseTable tbody');
             tableBody.innerHTML = '';
 
-            const startIndex = (currentPage - 1) * rowsPerPage;
-            const endIndex = Math.min(startIndex + rowsPerPage, filteredCourses.length);
-            const paginatedCourses = filteredCourses.slice(startIndex, endIndex);
+            const start = (currentPage - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+            const paginatedCourses = filteredCourses.slice(start, end);
 
             paginatedCourses.forEach(course => {
                 const row = document.createElement('tr');
@@ -495,25 +451,9 @@
             overlay.classList.toggle('active');
         }
 
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-
         function toggleDarkMode() {
             document.body.classList.toggle('dark-mode');
         }
-
-        window.addEventListener('scroll', function() {
-            const scrollToTopButton = document.getElementById('scrollToTop');
-            if (window.scrollY > 200) {
-                scrollToTopButton.style.display = 'flex';
-            } else {
-                scrollToTopButton.style.display = 'none';
-            }
-        });
 
         document.addEventListener('DOMContentLoaded', fetchCourses);
     </script>
