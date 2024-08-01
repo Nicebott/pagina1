@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Programación Docente UASD 2024-20</title>
     <style>
+        /* Estilos previos se mantienen igual */
         html, body {
             height: 100%;
             margin: 0;
@@ -343,6 +344,10 @@
             }
         }
 
+        function normalizeText(text) {
+            return text.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        }
+
         function displayCourses() {
             const tableBody = document.querySelector('#courseTable tbody');
             tableBody.innerHTML = '';
@@ -451,11 +456,11 @@
         }
 
         function search() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const searchTerm = normalizeText(document.getElementById('searchInput').value);
             filteredCourses = courses.filter(course => 
-                course.asignatura.toLowerCase().includes(searchTerm) ||
-                course.profesor.toLowerCase().includes(searchTerm) ||
-                course.nrc.toLowerCase().includes(searchTerm)
+                normalizeText(course.asignatura).includes(searchTerm) ||
+                normalizeText(course.profesor).includes(searchTerm) ||
+                normalizeText(course.nrc).includes(searchTerm)
             );
             currentPage = 1;
             displayCourses();
