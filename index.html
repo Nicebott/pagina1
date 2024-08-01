@@ -305,8 +305,6 @@
                             <th>Asignatura</th>
                             <th>Profesor</th>
                             <th>Horario</th>
-                            <th>Modalidad</th>
-                            <th>Calificación</th>
                             <th>Provincia</th>
                         </tr>
                     </thead>
@@ -361,17 +359,23 @@
 
             paginatedCourses.forEach(course => {
                 const row = document.createElement('tr');
+                const ratingColor = getRatingColor(course.calificacion);
                 row.innerHTML = `
                     <td>${course.nrc}</td>
-                    <td>${course.asignatura}</td>
-                    <td>${course.profesor}</td>
-                    <td>${course.horario}</td>
-                    <td>${course.modalidad}</td>
-                    <td>${course.calificacion}</td>
+                    <td>${course.asignatura}<br><span style="color: #888;">${course.clave}</span></td>
+                    <td>${course.profesor} <span style="background-color: ${ratingColor}; padding: 2px 5px; border-radius: 3px; color: white;">${course.calificacion}</span></td>
+                    <td>${course.horario} <span style="background-color: #007bff; padding: 2px 5px; border-radius: 3px; color: white;">${course.modalidad}</span></td>
                     <td>${course.provincia}</td>
                 `;
                 tableBody.appendChild(row);
             });
+        }
+
+        function getRatingColor(rating) {
+            if (rating >= 9) return '#28a745';
+            if (rating >= 7) return '#ffc107';
+            if (rating >= 5) return '#dc3545';
+            return '#6c757d';
         }
 
         function setupPagination() {
@@ -441,7 +445,7 @@
                         displayCourses();
                         setupPagination();
                     };
-                    paginationContainer.appendChild(lastButton);
+                   paginationContainer.appendChild(lastButton);
                 }
 
                 // Botón "»"
